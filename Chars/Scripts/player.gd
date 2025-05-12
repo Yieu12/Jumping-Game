@@ -29,13 +29,11 @@ func _on_area_2d_body_entered(body):
 		print("Hit Detected "+ body.get_name())
 		hide()
 		hit.emit()
-	# Must be deferred as we can't change physics properties on a physics callback.
 	
 func start(pos):
 	velocity.x = 0
 	position = pos
 	show()
-
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	hide()
