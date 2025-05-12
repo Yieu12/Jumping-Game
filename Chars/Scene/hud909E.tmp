@@ -1,0 +1,48 @@
+[gd_scene load_steps=3 format=3 uid="uid://dgaw82f2fopyx"]
+
+[ext_resource type="Script" path="res://Chars/Scripts/HUD.gd" id="1_6wcld"]
+[ext_resource type="FontFile" uid="uid://bp3nvp1acewgf" path="res://fonts/Xolonium-Regular.ttf" id="2_fpj4n"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_6wcld")
+
+[node name="scoreLabel" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 37.0
+theme_override_fonts/font = ExtResource("2_fpj4n")
+theme_override_font_sizes/font_size = 30
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="startButton" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = 20.0
+offset_right = 50.0
+offset_bottom = 70.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_fpj4n")
+text = "Start"
+
+[node name="message" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -41.5
+offset_top = -48.0
+offset_right = 41.5
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "High Score"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="startButton" to="." method="_on_button_pressed"]

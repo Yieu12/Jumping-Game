@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=3 uid="uid://cir2gmvjudsaf"]
+
+[ext_resource type="Script" uid="uid://3kco7rmic3f5" path="res://Chars/Scripts/enemy.gd" id="1_sgb85"]
+[ext_resource type="Texture2D" uid="uid://jmgh4k1bxknu" path="res://icon.svg" id="1_ydjhx"]
+[ext_resource type="Texture2D" uid="uid://csysry4fdjfau" path="res://art/enemyFlyingAlt_1.png" id="2_nanvh"]
+[ext_resource type="Texture2D" uid="uid://d20380rbnwkyx" path="res://art/enemyFlyingAlt_2.png" id="3_t3ymx"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_b285u"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_nanvh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_t3ymx")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_olbc3"]
+size = Vector2(128, 128)
+
+[node name="Enemy" type="RigidBody2D"]
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_sgb85")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0.531999, 0.00917312)
+rotation = 3.14159
+scale = Vector2(0.588195, 0.416843)
+sprite_frames = SubResource("SpriteFrames_b285u")
+frame = 1
+frame_progress = 0.0536381
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-3.75509e-06, 9.53674e-07)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_ydjhx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_olbc3")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." groups=["enemy"]]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

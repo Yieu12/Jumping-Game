@@ -1,0 +1,47 @@
+[gd_scene load_steps=8 format=3 uid="uid://dmuit01arhod4"]
+
+[ext_resource type="Script" uid="uid://u00ch3wwrtq5" path="res://Chars/Scripts/main.gd" id="1_480wa"]
+[ext_resource type="PackedScene" uid="uid://cir2gmvjudsaf" path="res://Chars/Scene/enemy.tscn" id="2_m65jy"]
+[ext_resource type="PackedScene" uid="uid://plgscksastku" path="res://Chars/Scene/player.tscn" id="3_nw8mj"]
+[ext_resource type="PackedScene" uid="uid://mi7bbp80bfrh" path="res://Chars/Scene/floor.tscn" id="4_ngqix"]
+[ext_resource type="PackedScene" uid="uid://dgaw82f2fopyx" path="res://Chars/Scene/hud.tscn" id="5_hk6tn"]
+[ext_resource type="AudioStream" uid="uid://clvgcn4c1rkcy" path="res://art/House In a Forest Loop.ogg" id="6_1ant2"]
+[ext_resource type="AudioStream" uid="uid://2ky5sajqkint" path="res://art/gameover.wav" id="7_v6mdh"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_480wa")
+enemy_scene = ExtResource("2_m65jy")
+
+[node name="Player" parent="." instance=ExtResource("3_nw8mj")]
+position = Vector2(43, 139)
+
+[node name="Floor" parent="." instance=ExtResource("4_ngqix")]
+position = Vector2(199, 186)
+
+[node name="mobTimer" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="scoreTimer" type="Timer" parent="."]
+
+[node name="groundSpawn" type="Marker2D" parent="."]
+position = Vector2(400, 140)
+
+[node name="airSpawn" type="Marker2D" parent="."]
+position = Vector2(400, 37)
+
+[node name="startPos" type="Marker2D" parent="."]
+position = Vector2(43, 139)
+
+[node name="HUD" parent="." instance=ExtResource("5_hk6tn")]
+
+[node name="mainMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_1ant2")
+parameters/looping = true
+
+[node name="gameOver" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_v6mdh")
+
+[connection signal="hit" from="Player" to="." method="game_over"]
+[connection signal="timeout" from="mobTimer" to="." method="_on_mob_timer_timeout"]
+[connection signal="timeout" from="scoreTimer" to="." method="_on_score_timer_timeout"]
+[connection signal="startGame" from="HUD" to="." method="new_Game"]
