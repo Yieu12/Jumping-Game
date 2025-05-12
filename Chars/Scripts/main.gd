@@ -51,6 +51,7 @@ func new_Game():
 func _on_score_timer_timeout() -> void:
 	score += 1
 	$HUD.update_score(score)
+	#Every 5 score the mobs spawn rate will be increased 
 	if score%5 == 0 && mobTime > 0.5:
 		mobTime -=0.1
 		$mobTimer.start(mobTime)
